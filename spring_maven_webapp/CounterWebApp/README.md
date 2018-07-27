@@ -3,7 +3,7 @@
 This example Java Web Application is based on this article:
 [How to create a Web Application Project with Maven](https://www.mkyong.com/maven/how-to-create-a-web-application-project-with-maven/)
 
-It is developed in JDK 8 + Tomcat 9.0.10 (or 7.0.47)
+It is developed in JDK 8 + Tomcat 9.0.10 on Windows, possible to run under Tomcat 7.0.47.
 
 
 Here are some developer notes.
@@ -21,22 +21,21 @@ cd CounterWebApp
 mvn eclipse:eclipse -Dwtpversion=2.0
 ```
 
-2. Add or update the source files according to the guide.
+2. Add and update the source files according to the article.
 
 
 3. Run in eclipse, or under Maven as below.
 
 ```
-# clean up and compile.
-mvn clean compile.
+# clean up, compile and perform unit test.
+mvn clean compile test.
 
 # build to WAR file.
 mvn package
 
-# launch in Tomcat container.
+# launch in Tomcat (v7.0.47) container.
 mvn tomcat7:run
 ```
 
 It is now ready to access the web application via link below:
 http://localhost:8080/CounterWebApp/
-
