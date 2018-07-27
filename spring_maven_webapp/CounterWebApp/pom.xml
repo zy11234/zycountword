@@ -111,6 +111,13 @@
         </configuration>
       </plugin>
 
+      <!-- To fix "mvn site" error "NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent" problem -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+      </plugin>
+
     </plugins>    
   </build>
 </project>
