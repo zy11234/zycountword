@@ -3,7 +3,7 @@
 This example Java Web Application is based on this article:
 [How to create a Web Application Project with Maven](https://www.mkyong.com/maven/how-to-create-a-web-application-project-with-maven/)
 
-It is developed in JDK 8 + Tomcat 9.0.10 on Windows, possible to run under Tomcat 7.0.47.
+It is developed in JDK 8 + Tomcat 9.0.10 on Windows. It is OK to run under Tomcat 7 and Tomcat 8.
 
 
 Here are some developer notes.
