@@ -13,7 +13,7 @@ public class SimpleCounter {
 	}
 	
 	public void increase() {
-		counter = counter + 1;
+		this.counter = this.counter + 1;
 	}
 
 	public long getValue() {
