@@ -1,6 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
+  
   <groupId>com.example</groupId>
   <artifactId>CounterWebApp</artifactId>
   <packaging>war</packaging>
@@ -9,7 +11,14 @@
   <url>http://maven.apache.org</url>
 
   <properties>
-      <jdk.version>1.8</jdk.version>
+      <!-- Set default encoding -->
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+      <!-- Set compiler version -->
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <maven.compiler.source>1.8</maven.compiler.source>
+
       <spring.version>4.1.1.RELEASE</spring.version>
       <jstl.version>1.2</jstl.version>
       <junit.version>4.12</junit.version>
@@ -75,7 +84,9 @@
     <finalName>CounterWebApp</finalName>
 
     <plugins>
-      <!-- Eclipse project -->
+      <!-- Eclipse project 
+      https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-eclipse-plugin/
+      -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-eclipse-plugin</artifactId>
@@ -89,15 +100,35 @@
         </configuration>
       </plugin>
 
-      <!-- Set JDK Compiler Level -->
+      <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/ -->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
-        <configuration>
-            <source>${jdk.version}</source>
-            <target>${jdk.version}</target>
-        </configuration>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+            <execution>
+                <phase>test</phase>
+                <goals>
+                    <goal>resources</goal>
+                    <goal>testResources</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+
+      <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-project-info-reports-plugin/  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.9</version>
+      </plugin>
+
+      <!-- To fix "mvn site" error "NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent" problem. -->
+      <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
       </plugin>
 
       <!-- For Maven Tomcat Plugin -->
@@ -109,13 +140,6 @@
             <server>TomcatServer</server>
             <path>/CounterWebApp</path>
         </configuration>
-      </plugin>
-
-      <!-- To fix "mvn site" error "NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent" problem -->
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-site-plugin</artifactId>
-        <version>3.7.1</version>
       </plugin>
 
     </plugins>
