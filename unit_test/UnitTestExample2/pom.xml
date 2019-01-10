@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mycompany.utest</groupId>
+  <artifactId>UnitTestExample2</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>UnitTestExample2</name>
+  <url>http://maven.apache.org</url>
+  <description>This is a JMockit Unit Test example for Java.</description>
+
+  <properties>
+      <!-- Set default encoding -->
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+      <!-- Set compiler version -->
+      <maven.compiler.target>1.8</maven.compiler.target>
+      <maven.compiler.source>1.8</maven.compiler.source>
+
+      <!-- Set JUnit version, used later in plug-in -->
+      <junit.version>4.12</junit.version>
+      <jmockit.version>1.44</jmockit.version>
+  </properties>
+
+  <dependencies>
+    <!-- Unit Test -->
+    <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+    </dependency>
+    
+    <!-- JMockit -->
+    <dependency>
+       <groupId>org.jmockit</groupId>
+        <artifactId>jmockit</artifactId>
+        <version>${jmockit.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+    <plugins>
+      <!-- Eclipse project
+      https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-eclipse-plugin/
+      -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+            <!-- Always download and attach dependencies source code -->
+            <downloadSources>true</downloadSources>
+            <downloadJavadocs>false</downloadJavadocs>
+        </configuration>
+      </plugin>
+
+      <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.0.2</version>
+        <executions>
+            <execution>
+                <phase>test</phase>
+                <goals>
+                    <goal>resources</goal>
+                    <goal>testResources</goal>
+                </goals>
+            </execution>
+        </executions>
+      </plugin>
+
+      <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-project-info-reports-plugin/  -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-project-info-reports-plugin</artifactId>
+        <version>2.9</version>
+      </plugin>
+
+      <!-- To fix "mvn site" error "NoClassDefFoundError: org/apache/maven/doxia/siterenderer/DocumentContent" problem. -->
+      <!-- https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/ -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-site-plugin</artifactId>
+        <version>3.7.1</version>
+      </plugin>
+
+     <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.21.0</version> <!-- or some other version -->
+        <configuration>
+           <argLine>
+              -javaagent:${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar
+           </argLine>
+           <!-- 
+             Add this in Eclipse VM Arguments while running unit test cases:
+             -javaagent:C:/Users/bobyuan/.m2/repository/org/jmockit/jmockit/1.44/jmockit-1.44.jar
+           -->
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+</project>
