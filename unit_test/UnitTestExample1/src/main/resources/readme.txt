@@ -1,0 +1,1 @@
+Application related main resources are placed here.

@@ -4,7 +4,7 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 /**
- * Unit test for IntOperations, coded in JUnit3 style.
+ * Unit test for IntOperations using JUnit3.
  * 
  * Integer.MAX_VALUE = 2147483647
  * Integer.MIN_VALUE = -2147483648
@@ -21,7 +21,7 @@ public class IntOperationsTest extends TestCase {
     
     /**
      * Constructor.
-     * @param name
+     * @param name The name of this test case.
      */
     public IntOperationsTest(String name) {  
         super(name);  
