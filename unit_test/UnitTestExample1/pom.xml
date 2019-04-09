@@ -120,6 +120,9 @@
 			The Surefire Report Plugin parses the generated TEST-*.xml files under ${basedir}/target/surefire-reports 
 			and renders them using DOXIA, which creates the web interface version of the test results.
 			https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-report-plugin/
+			This Plugin has these goals:
+				mvn surefire-report:report       #generate Surefire unit test report, output to: target/site/surefire-report.html
+				mvn surefire-report:report-only  #generate a unit test report without running all the unit tests again. 
 			-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -137,10 +140,6 @@
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<version>2.7</version>
 				<configuration>
-					<formats>
-						<format>html</format>
-						<format>xml</format>
-					</formats>
 					<!--
 					<instrumentation>
 						<ignores>

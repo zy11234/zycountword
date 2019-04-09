@@ -1,5 +1,7 @@
 package com.example.mock;
 
+import com.example.db.DBHelper;
+
 /**
  * This Greeting class has dependency to DBHelper.
  */

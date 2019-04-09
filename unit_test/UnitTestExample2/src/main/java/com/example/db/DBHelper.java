@@ -1,4 +1,4 @@
-package com.example.mock;
+package com.example.db;
 
 /**
  * This class is an API layer to the database.

@@ -3,6 +3,8 @@ package com.example.mock;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.example.db.DBHelper;
+
 import mockit.Expectations;
 import mockit.Mocked;
 import mockit.Verifications;
@@ -12,7 +14,7 @@ import mockit.Verifications;
  * 
  * JMockit supports (and requires) the use of JUnit (version 4 or 5) or TestNG; specifically, you need to:
  *   1. Add the jmockit dependency/jar to the test classpath.
- *   2. Configure the test execution JVM to start with the "-javaagent:<proper path>/jmockit.1.x.jar" 
+ *   2. Configure the test execution JVM to start with the "-javaagent:the_proper_path/jmockit.1.x.jar" 
  *      initialization parameter. It can be specified in the build script file for tools such as Maven 
  *      or Gradle, or in a "Run/Debug Configuration" for IntelliJ IDEA or Eclipse.
  */
