@@ -1,0 +1,13 @@
+# ignore specific folder.
+/.idea/
+/.settings/
+/log/
+/target/
+
+# ignore specific file.
+/CounterWebAppV2.iml
+
+# ignore any file.
+*.class
+*.log
+*.bak

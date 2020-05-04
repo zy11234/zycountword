@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.example.springmvc</groupId>
+    <artifactId>CounterWebAppV2</artifactId>
+    <packaging>war</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <name>CounterWebAppV2 WebApp</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <!-- Set default encoding -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Set compiler version -->
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+
+        <!-- Set dependency versions -->
+        <!-- https://mvnrepository.com/artifact/junit/junit -->
+        <junit.version>4.13</junit.version>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <servlet-api.version>4.0.1</servlet-api.version>
+        <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
+        <jsp-api.version>2.0</jsp-api.version>
+
+        <!-- Apache Commons -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <commons-lang3.version>3.10</commons-lang3.version>
+        
+        <!-- Database Access -->
+        <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+        <sqlite-jdbc.version>3.30.1</sqlite-jdbc.version>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <mysql-connector-java.version>5.1.48</mysql-connector-java.version>
+        <!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+        <mybatis.version>3.5.4</mybatis.version>
+
+        <!-- Logging -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <slf4j.version>1.7.30</slf4j.version>
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-classic -->
+        <logback-classic.version>1.2.3</logback-classic.version>
+
+        <!-- Spring -->
+        <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+        <spring.version>5.2.6.RELEASE</spring.version>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>${servlet-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+            <version>${jsp-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Apache Commons -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang3.version}</version>
+        </dependency>
+        
+        <!-- Database Access -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>${sqlite-jdbc.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+            <version>${mybatis.version}</version>
+        </dependency>
+        
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
+        
+        <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+            <!-- Apache Maven Eclipse Plugin (RETIRED)
+            The Maven Eclipse Plugin is used to generate Eclipse IDE files (*.classpath, *.project, 
+            *.wtpmodules and the .settings folder) for use with a project.
+            Disclaimer: Users are advised to use m2e
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-eclipse-plugin/
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-eclipse-plugin</artifactId>
+                <version>2.9</version>
+                <configuration>
+                    <!-- Always download and attach dependencies source code -->
+                    <downloadSources>true</downloadSources>
+                    <downloadJavadocs>false</downloadJavadocs>
+                    <!-- Avoid type mvn eclipse:eclipse -Dwtpversion=2.0 -->
+                    <wtpversion>2.0</wtpversion>
+                </configuration>
+            </plugin>
+
+            <!-- Apache Maven Resources Plugin
+            The Resources Plugin handles the copying of project resources to the output directory. 
+            There are two different kinds of resources: main resources and test resources. 
+            The difference is that the main resources are the resources associated to the main 
+            source code while the test resources are associated to the test source code.
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-resources-plugin/ 
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>resources</goal>
+                            <goal>testResources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Apache Maven Site Plugin
+            The Site Plugin is used to generate a site for the project. The generated site also 
+            includes the project's reports that were configured in the POM.
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-site-plugin/ 
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.9.0</version>
+            </plugin>
+
+            <!-- Jetty Maven Plugin 
+            The Jetty Maven plugin is useful for rapid development and testing. 
+            Usage: mvn jetty:run 
+            https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-maven-plugin 
+            -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.28.v20200408</version>
+                <configuration>
+                    <httpConnector>
+                        <port>8080</port>
+                    </httpConnector>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                        <descriptor>src/main/webapp/WEB-INF/web.xml</descriptor>
+                    </webApp>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>workerId</name>
+                            <value>0</value>
+                        </systemProperty>
+                    </systemProperties>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <reporting>
+        <plugins>
+            <!-- Apache Maven Project Info Reports Plugin
+            The Maven Project Info Reports plugin is used to generate reports information about the project.
+            Normally, we take off the dependency report to save time.
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-project-info-reports-plugin/
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+
+            <!-- Apache Maven Javadoc Plugin. 
+            The Javadoc Plugin uses the Javadoc tool to generate javadocs for the specified project. 
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-javadoc-plugin/
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+
+            <!-- Maven JXR Plugin. 
+            The JXR Plugin produces a cross-reference of the project's sources. 
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-jxr-plugin/
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+                <version>3.0.0</version>
+            </plugin>
+
+            <!-- Apache Maven PMD Plugin. 
+            The PMD Plugin allows you to automatically run the PMD code analysis tool on your project's 
+            source code and generate a site report with its results. 
+            It also supports the separate Copy/Paste Detector tool (or CPD) distributed with PMD.
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-pmd-plugin/
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-pmd-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <skipEmptyReport>false</skipEmptyReport>
+                </configuration>
+            </plugin>
+
+           <!-- Maven Surefire Report Plugin
+            The Surefire Report Plugin parses the generated TEST-*.xml files under ${basedir}/target/surefire-reports 
+            and renders them using DOXIA, which creates the web interface version of the test results.
+            https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-surefire-report-plugin/
+            
+            This Plugin has these goals:
+                mvn surefire-report:report       #generate Surefire unit test report, output to: target/site/surefire-report.html
+                mvn surefire-report:report-only  #generate a unit test report without running all the unit tests again. 
+            -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>3.0.0-M4</version>
+            </plugin>
+        </plugins>
+    </reporting>    
+</project>

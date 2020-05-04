@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!--
+############################################################################### 
+                MyBatis Configuration (for production)
+###############################################################################
+-->
+<configuration>
+	<!-- Sqlite -->
+	<properties>
+	  <property name="db_driver" value="org.sqlite.JDBC"/>
+	  <property name="db_url" value="jdbc:sqlite:db/sqlite/counter.db"/>
+	  <property name="db_username" value=""/>
+	  <property name="db_password" value=""/>
+	</properties>
+	
+	<!-- MySQL -->
+	<!--
+	<properties>
+	  <property name="db_driver" value="com.mysql.jdbc.Driver"/>
+	  <property name="db_url" value="jdbc:mysql://localhost:3306/counterdb?useSSL=false&amp;autoReconnect=true&amp;useUnicode=true&amp;characterEncoding=utf8"/>
+	  <property name="db_username" value="counterdbuser"/>
+	  <property name="db_password" value="CounterDbPasswd1+"/>
+	</properties>
+	-->
+
+	<environments default="production">
+		<environment id="production">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${db_driver}" />
+				<property name="url" value="${db_url}" />
+				<property name="username" value="${db_username}" />
+				<property name="password" value="${db_password}" />
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper class="com.example.springmvc.db.dao.CounterMapper" />
+	</mappers>
+
+</configuration>
