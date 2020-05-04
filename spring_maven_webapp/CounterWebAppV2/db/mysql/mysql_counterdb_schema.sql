@@ -1,6 +1,6 @@
 -- Example Database
 -- ---------------------
--- Host: localhost      
+-- Host: localhost
 -- Datebase: counterdb
 -- Server Version: 5.7
 

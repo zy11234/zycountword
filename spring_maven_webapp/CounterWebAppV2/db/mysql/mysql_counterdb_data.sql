@@ -1,6 +1,6 @@
 -- Example Database
 -- ---------------------
--- Host: localhost      
+-- Host: localhost
 -- Datebase: counterdb
 -- Server Version: 5.7
 
@@ -22,10 +22,10 @@ USE `counterdb`;
 DROP TABLE IF EXISTS `TabCounter`;
 
 CREATE TABLE `TabCounter` (
-	`CounterId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-	`CounterName` TINYTEXT NOT NULL,
-	`CounterValue` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
-	PRIMARY KEY (`CounterId`)
+    `CounterId` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+    `CounterName` TINYTEXT NOT NULL,
+    `CounterValue` BIGINT(20) UNSIGNED NOT NULL DEFAULT 0,
+    PRIMARY KEY (`CounterId`)
 ) ENGINE=InnoDB COLLATE='utf8_general_ci';
 
 

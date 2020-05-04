@@ -35,37 +35,37 @@ The development environment:
 Maven build commands:
 
 1. Create the web application.
-   
+
    ```shell
    # Create the "CounterWebAppV2" web application.
    mvn archetype:generate -DgroupId=com.example -DartifactId=CounterWebAppV2 -DarchetypeArtifactId=maven-archetype-webapp -DinteractiveMode=false
-   
+
    # Navigate to "CounterWebAppV2" folder.
    cd CounterWebAppV2
-   
+
    # Generate Eclipse web project files.
    mvn eclipse:eclipse -Dwtpversion=2.0
    ```
-   
+
 2. Build the web application.
-   
+
    ```shell
    # Check jar dependency, useful in finding the conflicting jars.
    mvn dependency:tree
-   
+
    # Run jetty server at http://localhost:8080/.
    mvn jetty:run
-   
+
    # Clean up target folder (delete all).
    mvn clean install
-   
+
    # Build (include testing) and install to local repository.
    mvn install
-   
+
    # Build the release ".war" package.
    # To skip unit testing, add parameter: -Dmaven.test.skip=true
-   mvn clean package 
-   
+   mvn clean package
+
    # Generate static site and reports.
    mvn site
    ```
@@ -85,13 +85,13 @@ When complete, it should look like this:
 
 ![](asset/eclipse_tomcat/Preferences_Tomcat_Server.png)
 
-Select the project (here it is "CounterWebAppV2") in the "Project Explorer", then select menu "Run | Run As | Run On Server". 
+Select the project (here it is "CounterWebAppV2") in the "Project Explorer", then select menu "Run | Run As | Run On Server".
 
 > Note: For debug, select menu "Run | Debug As | Debug On Server". In debug mode, we can set breakpoint in Java code.
 
 ![](asset/eclipse_tomcat/Run_On_Server_1.png)
 
-Click "Next", and then " Finish" button to start the Web Application. 
+Click "Next", and then " Finish" button to start the Web Application.
 
 Normally it will automatically open a browser to access the web application.
 
@@ -106,11 +106,11 @@ A plugin is been used. Open "Eclipse Marketplace" and search for "jetty", instal
 
 ![](asset/eclipse_jetty/Eclipse_Marketplace_search_jetty.png)
 
-Select the project (here it is "CounterWebAppV2") in the "Project Explorer", then select menu "Run | Run As | Run with Jetty". 
+Select the project (here it is "CounterWebAppV2") in the "Project Explorer", then select menu "Run | Run As | Run with Jetty".
 
 > Note: For debug, select menu "Run | Debug As | Run with Jetty". In debug mode, we can set break point in Java code.
 
-![](asset/eclipse_jetty/Run_Configurations.png) 
+![](asset/eclipse_jetty/Run_Configurations.png)
 
 Click "Run" button to launch Jetty server. We can see log output in Console. When Jetty started, we can type command "open" in Console to open the browser to the web application.
 
@@ -135,7 +135,7 @@ restart, r          Restarts the server.
 stop, s             Stops the server gracefully.
 exit, x             Exits the VM.
 
-Using > will pipe the output of any command to a file. Arguments may contain 
+Using > will pipe the output of any command to a file. Arguments may contain
 ${..} placeholds, to access environment and system properties.
 ```
 
@@ -154,11 +154,11 @@ A workaround is to use Maven plugin. I have this plugin configured in `pom.xml` 
 ```xml
 <build>
     <plugins>
-        
-       <!-- Jetty Maven Plugin 
-       The Jetty Maven plugin is useful for rapid development and testing. 
-       Usage: mvn jetty:run 
-       https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-maven-plugin 
+
+       <!-- Jetty Maven Plugin
+       The Jetty Maven plugin is useful for rapid development and testing.
+       Usage: mvn jetty:run
+       https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-maven-plugin
        -->
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
@@ -181,7 +181,7 @@ A workaround is to use Maven plugin. I have this plugin configured in `pom.xml` 
                 </systemProperties>
             </configuration>
         </plugin>
-        
+
     </plugins>
 </build>
 ```
@@ -200,14 +200,14 @@ I can set break-point in Java code for debugging. However, as I did not use it i
 
 This example can use SQLite, and MySQL as back-end database.
 
-The database connection is configured in `mybatis-config.xml` under the resource folder `src/main/resources`. 
+The database connection is configured in `mybatis-config.xml` under the resource folder `src/main/resources`.
 
 
 ### SQLite
 
 This is a file based database, the data file is `db/sqlite/counter.db`. You have to give the correct path in `mybatis-config.xml` pointing to the data file.
 
-> Note: 
+> Note:
 >
 > * Sometimes the relative path will cause problem! In such case, you can change to the absolute path.
 > * A free tool called [DB Browser for SQLite](http://sqlitebrowser.org/) is recommended to work with SQLite database development.
@@ -218,9 +218,9 @@ It has only 1 table, defined as below:
 
 ```sql
 CREATE TABLE `TabCounter` (
-	`CounterId`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	`CounterName`	TEXT NOT NULL UNIQUE,
-	`CounterValue`	INTEGER DEFAULT 0
+    `CounterId` INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    `CounterName`   TEXT NOT NULL UNIQUE,
+    `CounterValue`  INTEGER DEFAULT 0
 )
 ```
 
@@ -233,7 +233,7 @@ No need to initialize the table with data.
 
 This web application can use MySQL (version 5.7) as backend database. In my development environment, I have a local MySQL database running as Windows service.
 
-> Note: 
+> Note:
 >
 > * A free tool called [HeidiSQL](https://www.heidisql.com) is recommended to work with MySQL database development. It is also available in Windows Store.
 
@@ -299,7 +299,7 @@ C:\opt\app\jetty-distribution-9.4.28.v20200408
 │  ├─mysql
 │  │      mysql_counterdb_data.sql
 │  │      mysql_counterdb_schema.sql
-│  │      
+│  │
 │  └─sqlite
 │          counter.db
 │
@@ -310,7 +310,7 @@ C:\opt\app\jetty-distribution-9.4.28.v20200408
 
 
 
-Now goes to Jetty home directory (this becomes the **current working directory**), launch it by command: 
+Now goes to Jetty home directory (this becomes the **current working directory**), launch it by command:
 ```shell
 java -jar start.jar
 ```
@@ -341,17 +341,17 @@ C:\opt\app\apache-tomcat-9.0.33
 │  ├─mysql
 │  │      mysql_counterdb_data.sql
 │  │      mysql_counterdb_schema.sql
-│  │      
+│  │
 │  └─sqlite
 │          counter.db
-│      
+│
 └─webapps
       CounterWebAppV2.war
 ```
 
 
 
-Now goes to Tomcat home directory (this becomes the **current working directory**), launch it by command: 
+Now goes to Tomcat home directory (this becomes the **current working directory**), launch it by command:
 ```shell
 bin\startup.bat
 ```

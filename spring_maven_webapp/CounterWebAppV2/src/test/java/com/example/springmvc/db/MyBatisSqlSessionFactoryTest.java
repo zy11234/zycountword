@@ -5,9 +5,9 @@ import org.junit.Test;
 
 public class MyBatisSqlSessionFactoryTest {
 
-	@Test
-	public void testGetSqlSessionFactory() {
-		Assert.assertNotNull(MyBatisSqlSessionFactory.getSqlSessionFactory());
-	}
+    @Test
+    public void testGetSqlSessionFactory() {
+        Assert.assertNotNull(MyBatisSqlSessionFactory.getSqlSessionFactory());
+    }
 
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-############################################################################### 
+###############################################################################
                Logback Configuration (for dev/testing)
-############################################################################### 
+###############################################################################
 
 debug: Set to true for debug, if this configuration file is not working correctly.
 scan: By default, it scans and reloads this configuration file in every minute.
