@@ -1,4 +1,4 @@
-package com.example.springmvc.db.model;
+package com.example.springmvc.db.entity;
 
 import java.io.Serializable;
 

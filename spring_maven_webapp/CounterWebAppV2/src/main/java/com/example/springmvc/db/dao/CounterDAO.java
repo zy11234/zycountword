@@ -3,7 +3,7 @@ package com.example.springmvc.db.dao;
 import org.apache.ibatis.session.SqlSession;
 
 import com.example.springmvc.db.MyBatisSqlSessionWrapper;
-import com.example.springmvc.db.model.Counter;
+import com.example.springmvc.db.entity.Counter;
 
 /**
  * Data Access Object for Counter entity.

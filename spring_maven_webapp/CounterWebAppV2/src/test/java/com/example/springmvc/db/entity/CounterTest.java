@@ -1,8 +1,10 @@
-package com.example.springmvc.db.model;
+package com.example.springmvc.db.entity;
 
 import org.junit.Assert;
 
 import org.junit.Test;
+
+import com.example.springmvc.db.entity.Counter;
 
 public class CounterTest {
 

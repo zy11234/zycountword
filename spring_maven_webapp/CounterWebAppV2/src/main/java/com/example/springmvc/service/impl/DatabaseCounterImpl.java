@@ -1,7 +1,8 @@
-package com.example.springmvc.core;
+package com.example.springmvc.service.impl;
 
 import com.example.springmvc.db.dao.CounterDAO;
-import com.example.springmvc.db.model.Counter;
+import com.example.springmvc.db.entity.Counter;
+import com.example.springmvc.service.INamedCounter;
 
 /**
  * DB based counter implementation.

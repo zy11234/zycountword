@@ -1,4 +1,4 @@
-package com.example.springmvc.core;
+package com.example.springmvc.service;
 
 public interface INamedCounter {
     /**

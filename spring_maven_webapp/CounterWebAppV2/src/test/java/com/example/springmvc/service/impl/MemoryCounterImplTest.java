@@ -1,14 +1,15 @@
-package com.example.springmvc.core;
+package com.example.springmvc.service.impl;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.example.springmvc.core.DatabaseCounterImpl;
-import com.example.springmvc.core.INamedCounter;
+import com.example.springmvc.service.INamedCounter;
+import com.example.springmvc.service.impl.MemoryCounterImpl;
 
-public class DatabaseCounterImplTest {
+public class MemoryCounterImplTest {
+
     private INamedCounter getCounterImpl() {
-        return new DatabaseCounterImpl();
+        return new MemoryCounterImpl();
     }
 
     @Test
@@ -31,6 +32,7 @@ public class DatabaseCounterImplTest {
     @Test
     public void test_increase() {
         final String COUNTER_NAME_2 = "counter2";
+        final String COUNTER_NAME_X = "counterX";
         INamedCounter nc = getCounterImpl();
 
         nc.reset(COUNTER_NAME_2);
@@ -45,20 +47,36 @@ public class DatabaseCounterImplTest {
 
         nc.increase(COUNTER_NAME_2);
         Assert.assertEquals(3, nc.getValue(COUNTER_NAME_2));
+
+        // exceptional cases #1.
+        nc.setValue(COUNTER_NAME_2, Long.MAX_VALUE);
+        Assert.assertEquals(Long.MAX_VALUE, nc.getValue(COUNTER_NAME_2));
+
+        nc.increase(COUNTER_NAME_2);
+        Assert.assertEquals(0, nc.getValue(COUNTER_NAME_2));  //restart from 0 to avoid overflow.
+
+        // exceptional cases #2.
+        nc.increase(COUNTER_NAME_X);
+        Assert.assertEquals(1, nc.getValue(COUNTER_NAME_X));  //start from 0.
     }
 
     @Test
     public void test_getValue() {
         final String COUNTER_NAME_1 = "counter1";
+        final String COUNTER_NAME_Y = "counterY";
         INamedCounter nc = getCounterImpl();
 
         //normal cases.
         nc.reset(COUNTER_NAME_1);
         Assert.assertEquals(0, nc.getValue(COUNTER_NAME_1));
 
-        nc.setValue(COUNTER_NAME_1, 65536);
-        Assert.assertEquals(65536, nc.getValue(COUNTER_NAME_1));
+        nc.setValue(COUNTER_NAME_1, Long.MAX_VALUE);
+        Assert.assertEquals(Long.MAX_VALUE, nc.getValue(COUNTER_NAME_1));
+
+        //exceptional cases.
+        Assert.assertEquals(0, nc.getValue(COUNTER_NAME_Y));  //start from 0.
     }
+
 
     @Test
     public void test_basic_usage() {
@@ -111,6 +129,12 @@ public class DatabaseCounterImplTest {
         nc.increase(COUNTER_NAME_2);
         Assert.assertEquals(5001, nc.getValue(COUNTER_NAME_2));
 
+        // restart from 0 to avoid overflow.
+        nc.setValue(COUNTER_NAME_2, Long.MAX_VALUE);
+        Assert.assertEquals(Long.MAX_VALUE, nc.getValue(COUNTER_NAME_2));
+        nc.increase(COUNTER_NAME_2);
+        Assert.assertEquals(0, nc.getValue(COUNTER_NAME_2));
+
         // counter1 reset.
         nc.increase(COUNTER_NAME_1);
         Assert.assertEquals(3, nc.getValue(COUNTER_NAME_1));
@@ -119,6 +143,6 @@ public class DatabaseCounterImplTest {
 
         // counter2 continue.
         nc.increase(COUNTER_NAME_2);
-        Assert.assertEquals(5002, nc.getValue(COUNTER_NAME_2));
+        Assert.assertEquals(1, nc.getValue(COUNTER_NAME_2));
     }
 }

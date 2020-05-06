@@ -1,7 +1,9 @@
-package com.example.springmvc.core;
+package com.example.springmvc.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import com.example.springmvc.service.INamedCounter;
 
 /**
  * RAM based counter implementation.

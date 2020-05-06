@@ -14,19 +14,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 public class WebMvcConfig extends WebMvcConfigurationSupport {
 
-    /**
-     * locate our static resources and serve them.
-     */
-    @Override
-    public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
-    }
+	/**
+	 * Locate our static resources and serve them.
+	 */
+	@Override
+	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/assets/**").addResourceLocations("/assets/");
+	}
 
-    @Controller
-    static class FaviconController {
-        @GetMapping("favicon.ico")
-        public String favicon() {
-            return "forward:/assets/img/favicon.ico.png";
-        }
-    }
+	@Controller
+	static class FaviconController {
+		@GetMapping("favicon.ico")
+		public String favicon() {
+			return "forward:/assets/img/favicon.ico.png";
+		}
+	}
 }

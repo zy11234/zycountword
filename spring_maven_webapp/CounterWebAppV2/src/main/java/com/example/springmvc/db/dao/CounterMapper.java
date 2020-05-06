@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.example.springmvc.db.model.Counter;
+import com.example.springmvc.db.entity.Counter;
 
 public interface CounterMapper {
 	String SELECT_COUNTER = "SELECT CounterId, CounterName, CounterValue FROM TabCounter WHERE CounterName = #{counterName}";

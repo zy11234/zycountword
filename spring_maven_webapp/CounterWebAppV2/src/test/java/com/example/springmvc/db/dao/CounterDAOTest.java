@@ -3,8 +3,8 @@ package com.example.springmvc.db.dao;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.example.springmvc.db.model.Counter;
 import com.example.springmvc.db.dao.CounterDAO;
+import com.example.springmvc.db.entity.Counter;
 
 public class CounterDAOTest {
     private static final String COUNTER_NAME_1 = "counterForUnitTesting1";
