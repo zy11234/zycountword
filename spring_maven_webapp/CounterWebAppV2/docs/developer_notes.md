@@ -102,7 +102,7 @@ Normally it will automatically open a browser to access the web application.
 
 ### Eclipse with Jetty
 
-A plugin is been used. Open "Eclipse Marketplace" and search for "jetty", install the "Eclipse Jetty" plugin.
+A plugin has been used. Open "Eclipse Marketplace" and search for "jetty", install the "Eclipse Jetty" plugin.
 
 ![](asset/eclipse_jetty/Eclipse_Marketplace_search_jetty.png)
 
@@ -287,7 +287,7 @@ mvn clean package -Dmaven.test.skip=true
 
 Assume JDK 1.8 is available.
 
-1. [Download](https://www.eclipse.org/jetty/download.html) the latest version of Jetty, extract to somewhere. Here in my example, it is `C:\opt\app\jetty-distribution-9.4.28.v20200408`.
+1. [Download](https://www.eclipse.org/jetty/download.html) the latest version of Jetty, extract somewhere. Here in my example, it is `C:\opt\app\jetty-distribution-9.4.28.v20200408`.
 2. Copy the release file`CounterWebAppV2.war` to `webapps` folder in Jetty.
 4. Copy `db` folder from source code into Jetty, if it is not exist there.
 
@@ -329,7 +329,7 @@ To stop Jetty, just press "Ctrl+C" to terminate the jetty process.
 
 Assume JDK 1.8 is available.
 
-1. [Download](https://tomcat.apache.org/download-90.cgi) the latest 9.x version of Tomcat, extract to somewhere. Here in my example, it is `C:\opt\app\apache-tomcat-9.0.33`.
+1. [Download](https://tomcat.apache.org/download-90.cgi) the latest 9.x version of Tomcat, extract somewhere. Here in my example, it is `C:\opt\app\apache-tomcat-9.0.33`.
 2. Copy the release file`CounterWebAppV2.war` to `webapps` folder in Tomcat.
 4. Copy `db` folder from source code into Tomcat, if it is not exist there.
 

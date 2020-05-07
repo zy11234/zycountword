@@ -23,17 +23,18 @@ public class NamedCounterFactoryTest {
         Assert.assertTrue(nc4 instanceof DatabaseCounterImpl);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void test_getCounterImpl_Null() {
         NamedCounterFactory.getCounterImpl(null);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void test_getCounterImpl_Empty() {
         NamedCounterFactory.getCounterImpl("");
     }
 
-    @Test(expected = RuntimeException.class)
+
+    @Test(expected = IllegalArgumentException.class)
     public void test_getCounterImpl_NoSuchCounter() {
         NamedCounterFactory.getCounterImpl("NoSuchCounter");
     }

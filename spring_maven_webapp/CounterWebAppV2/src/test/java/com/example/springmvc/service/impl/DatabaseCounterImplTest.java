@@ -7,14 +7,11 @@ import com.example.springmvc.service.INamedCounter;
 import com.example.springmvc.service.impl.DatabaseCounterImpl;
 
 public class DatabaseCounterImplTest {
-    private INamedCounter getCounterImpl() {
-        return new DatabaseCounterImpl();
-    }
 
     @Test
     public void test_reset_setValue() {
         final String COUNTER_NAME_1 = "counter1";
-        INamedCounter nc = getCounterImpl();
+        INamedCounter nc = new DatabaseCounterImpl();
 
         //test reset().
         nc.reset(COUNTER_NAME_1);
@@ -26,51 +23,81 @@ public class DatabaseCounterImplTest {
 
         nc.setValue(COUNTER_NAME_1, 500);
         Assert.assertEquals(500, nc.getValue(COUNTER_NAME_1));
+        
+        //test reset().
+        nc.reset(COUNTER_NAME_1);
+        Assert.assertEquals(0, nc.getValue(COUNTER_NAME_1));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void test_setValue_invalid() {
+        final String COUNTER_NAME_1 = "counter1";
+        INamedCounter nc = new DatabaseCounterImpl();
+        
+        // valid cases.
+        nc.setValue(COUNTER_NAME_1, 0);
+        nc.setValue(COUNTER_NAME_1, Long.MAX_VALUE);
+        
+        // invalid case, will throw out IllegalArgumentException.
+        nc.setValue(COUNTER_NAME_1, -1);
+    }
+    
     @Test
     public void test_increase() {
         final String COUNTER_NAME_2 = "counter2";
-        INamedCounter nc = getCounterImpl();
+        final String COUNTER_NAME_X = "counterX";
+        INamedCounter nc = new DatabaseCounterImpl();
 
         nc.reset(COUNTER_NAME_2);
         Assert.assertEquals(0, nc.getValue(COUNTER_NAME_2));
 
         // normal cases.
-        nc.increase(COUNTER_NAME_2);
+        Assert.assertEquals(1, nc.increase(COUNTER_NAME_2));
         Assert.assertEquals(1, nc.getValue(COUNTER_NAME_2));
 
-        nc.increase(COUNTER_NAME_2);
+        Assert.assertEquals(2, nc.increase(COUNTER_NAME_2));
         Assert.assertEquals(2, nc.getValue(COUNTER_NAME_2));
 
-        nc.increase(COUNTER_NAME_2);
+        Assert.assertEquals(3, nc.increase(COUNTER_NAME_2));
         Assert.assertEquals(3, nc.getValue(COUNTER_NAME_2));
+        
+        // exceptional cases #1.
+        nc.reset(COUNTER_NAME_X);
+        Assert.assertEquals(1, nc.increase(COUNTER_NAME_X)); //start from 0.
+        Assert.assertEquals(1, nc.getValue(COUNTER_NAME_X));  
+
+        // exceptional cases #2.
+        nc.setValue(COUNTER_NAME_2, Long.MAX_VALUE);
+        Assert.assertEquals(Long.MAX_VALUE, nc.getValue(COUNTER_NAME_2));
+
+        Assert.assertEquals(0, nc.increase(COUNTER_NAME_2)); //restart from 0 to avoid overflow.
+        Assert.assertEquals(0, nc.getValue(COUNTER_NAME_2));  
     }
 
     @Test
     public void test_getValue() {
         final String COUNTER_NAME_1 = "counter1";
-        INamedCounter nc = getCounterImpl();
-
+        INamedCounter nc = new DatabaseCounterImpl();
+        
         //normal cases.
         nc.reset(COUNTER_NAME_1);
         Assert.assertEquals(0, nc.getValue(COUNTER_NAME_1));
 
-        nc.setValue(COUNTER_NAME_1, 65536);
-        Assert.assertEquals(65536, nc.getValue(COUNTER_NAME_1));
+        nc.setValue(COUNTER_NAME_1, Long.MAX_VALUE);
+        Assert.assertEquals(Long.MAX_VALUE, nc.getValue(COUNTER_NAME_1));
     }
 
     @Test
     public void test_basic_usage() {
         final String COUNTER_NAME = "counter1";
-
-        INamedCounter nc = getCounterImpl();
+        INamedCounter nc = new DatabaseCounterImpl();
+        
         nc.reset(COUNTER_NAME);
         Assert.assertEquals(0, nc.getValue(COUNTER_NAME));
 
-        nc.increase(COUNTER_NAME);
+        Assert.assertEquals(1, nc.increase(COUNTER_NAME));
         Assert.assertEquals(1, nc.getValue(COUNTER_NAME));
-        nc.increase(COUNTER_NAME);
+        Assert.assertEquals(2, nc.increase(COUNTER_NAME));
         Assert.assertEquals(2, nc.getValue(COUNTER_NAME));
 
         nc.reset(COUNTER_NAME);
@@ -86,8 +113,8 @@ public class DatabaseCounterImplTest {
     public void test_extended_usage() {
         final String COUNTER_NAME_1 = "counter1";
         final String COUNTER_NAME_2 = "counter2";
-
-        INamedCounter nc = getCounterImpl();
+        INamedCounter nc = new DatabaseCounterImpl();
+        
         nc.reset(COUNTER_NAME_1);
         Assert.assertEquals(0, nc.getValue(COUNTER_NAME_1));
         nc.reset(COUNTER_NAME_2);
@@ -108,17 +135,23 @@ public class DatabaseCounterImplTest {
         // counter2 set value.
         nc.setValue(COUNTER_NAME_2, 5000);
         Assert.assertEquals(5000, nc.getValue(COUNTER_NAME_2));
-        nc.increase(COUNTER_NAME_2);
+        Assert.assertEquals(5001, nc.increase(COUNTER_NAME_2));
         Assert.assertEquals(5001, nc.getValue(COUNTER_NAME_2));
 
+        // restart from 0 to avoid overflow.
+        nc.setValue(COUNTER_NAME_2, Long.MAX_VALUE);
+        Assert.assertEquals(Long.MAX_VALUE, nc.getValue(COUNTER_NAME_2));
+        Assert.assertEquals(0, nc.increase(COUNTER_NAME_2));
+        Assert.assertEquals(0, nc.getValue(COUNTER_NAME_2));
+
         // counter1 reset.
-        nc.increase(COUNTER_NAME_1);
+        Assert.assertEquals(3, nc.increase(COUNTER_NAME_1));
         Assert.assertEquals(3, nc.getValue(COUNTER_NAME_1));
         nc.reset(COUNTER_NAME_1);
         Assert.assertEquals(0, nc.getValue(COUNTER_NAME_1));
 
         // counter2 continue.
         nc.increase(COUNTER_NAME_2);
-        Assert.assertEquals(5002, nc.getValue(COUNTER_NAME_2));
+        Assert.assertEquals(1, nc.getValue(COUNTER_NAME_2));
     }
 }

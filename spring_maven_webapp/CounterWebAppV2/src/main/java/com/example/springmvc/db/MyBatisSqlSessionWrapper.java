@@ -18,7 +18,7 @@ public abstract class MyBatisSqlSessionWrapper {
      * @return An object that is returned from performInSession() method call.
      */
     public Object execute() {
-        Object result = null;
+        Object result;
         SqlSession session = null;
 
         try {

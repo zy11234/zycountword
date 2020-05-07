@@ -59,6 +59,7 @@ public class MyBatisSqlSessionFactory {
             if (ins != null) {
                 try {
                     ins.close();
+                    ins = null;
                 } catch (IOException e) {
                     // do nothing.
                 }

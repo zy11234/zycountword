@@ -31,55 +31,68 @@ public class DatabaseCounterImpl implements INamedCounter {
 
     @Override
     public void setValue(String counterName, long counterValue) {
-        Counter counterInDb = dao.getByName(counterName);
-        if (counterInDb != null) {
-            // update into database.
-            counterInDb.setCounterValue(counterValue);
-            dao.update(counterInDb);
-        } else {
-            // insert into database.
-            Counter counter = new Counter();
-            counter.setCounterName(counterName);
-            counter.setCounterValue(counterValue);
-            dao.insert(counter);
-        }
+    	if (counterValue < 0) {
+    		throw new IllegalArgumentException("counterValue must >= 0");
+    	} else {
+	        Counter counterInDb = dao.getByName(counterName);
+	        if (counterInDb != null) {
+	            // update into database.
+	            counterInDb.setCounterValue(counterValue);
+	            dao.update(counterInDb);
+	        } else {
+	            // insert into database.
+	            Counter counter = new Counter();
+	            counter.setCounterName(counterName);
+	            counter.setCounterValue(counterValue);
+	            dao.insert(counter);
+	        }
+    	}
     }
 
     @Override
-    public void increase(String counterName) {
-        Counter counterInDb = dao.getByName(counterName);
+    public long increase(String counterName) {
+    	Long valNew;
+    	Counter counterInDb = dao.getByName(counterName);
         if (counterInDb != null) {
-            long counterValue = counterInDb.getCounterValue();
-            counterInDb.setCounterValue(counterValue + 1);
+        	Long val = counterInDb.getCounterValue();
+        	if (val >= Long.MAX_VALUE) {
+                valNew = 0L; // loop back and restart from 0.
+            } else {
+                valNew = val + 1; // increased by 1.
+            }
+        	
+        	// update into database.
+            counterInDb.setCounterValue(valNew);
             dao.update(counterInDb);
         } else {
-            // start from 0.
-            long counterValue = 0;
+        	valNew = 1L; // new counter start from 0, increased to 1.
 
             // insert into database.
             Counter counter = new Counter();
             counter.setCounterName(counterName);
-            counter.setCounterValue(counterValue + 1);
+            counter.setCounterValue(valNew);
             dao.insert(counter);
         }
+        
+        return valNew;
     }
 
     @Override
     public long getValue(String counterName) {
-        long counterValue;
+    	Long val;
         Counter counterInDb = dao.getByName(counterName);
         if (counterInDb != null) {
-            counterValue = counterInDb.getCounterValue();
+        	val = counterInDb.getCounterValue();
         } else {
-            // start from 0.
-            counterValue = 0;
+        	val = 0L; // start from 0.
 
             // insert into database.
             Counter counter = new Counter();
             counter.setCounterName(counterName);
-            counter.setCounterValue(counterValue);
+            counter.setCounterValue(val);
             dao.insert(counter);
         }
-        return counterValue;
+        
+        return val;
     }
 }

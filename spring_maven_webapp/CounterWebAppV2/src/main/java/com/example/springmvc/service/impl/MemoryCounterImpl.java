@@ -11,7 +11,10 @@ import com.example.springmvc.service.INamedCounter;
  * @author bobyuan
  */
 public class MemoryCounterImpl implements INamedCounter {
-    private final Map<String, Long> counterMap = new HashMap<String, Long>();
+    /**
+     * Use hash map to hold the counters.
+     */
+    private final Map<String, Long> counterMap = new HashMap<>();
 
     @Override
     public void reset(String counterName) {
@@ -21,36 +24,42 @@ public class MemoryCounterImpl implements INamedCounter {
 
     @Override
     public void setValue(String counterName, long counterValue) {
-        Long val = counterValue;
-        counterMap.put(counterName, val);
+    	if (counterValue < 0) {
+    		throw new IllegalArgumentException("counterValue must >= 0");
+    	} else {
+	        Long val = counterValue;
+	        counterMap.put(counterName, val);
+    	}
     }
 
     @Override
-    public void increase(String counterName) {
+    public long increase(String counterName) {
         Long valNew;
         Long val = counterMap.get(counterName);
         if (val != null) {
             if (val >= Long.MAX_VALUE) {
-                valNew = 0L; // restart from 0, to avoid overflow.
+                valNew = 0L; // loop back and restart from 0.
             } else {
                 valNew = val + 1; // increased by 1.
             }
         } else {
             valNew = 1L; // new counter start from 0, increased to 1.
         }
+        
         counterMap.put(counterName, valNew);
+        return valNew;
     }
 
     @Override
     public long getValue(String counterName) {
-        Long lngResult;
+        Long valResult;
         Long val = counterMap.get(counterName);
         if (val != null) {
-            lngResult = val;
+        	valResult = val;
         } else {
-            lngResult = 0L;  // start from 0.
-            counterMap.put(counterName, lngResult);
+        	valResult = 0L;  // start from 0.
+            counterMap.put(counterName, valResult);
         }
-        return lngResult.longValue();
+        return valResult;
     }
 }
