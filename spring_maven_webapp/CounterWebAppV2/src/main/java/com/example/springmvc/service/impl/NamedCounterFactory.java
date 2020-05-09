@@ -1,14 +1,11 @@
 package com.example.springmvc.service.impl;
 
 import com.example.springmvc.service.INamedCounter;
-import com.example.springmvc.service.impl.MemoryCounterImpl;
-import com.example.springmvc.service.impl.DatabaseCounterImpl;
 
 /**
  * Factory to get counter implementation (MemoryCounter / DatabaseCounter).
  *
  * @author bobyuan
- *
  */
 public class NamedCounterFactory {
 

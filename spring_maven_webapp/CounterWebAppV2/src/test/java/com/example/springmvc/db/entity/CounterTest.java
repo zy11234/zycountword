@@ -1,11 +1,10 @@
 package com.example.springmvc.db.entity;
 
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-import org.junit.Test;
-
-import com.example.springmvc.db.entity.Counter;
-
+@Tag("junit5")
 public class CounterTest {
 
     @Test
@@ -13,21 +12,21 @@ public class CounterTest {
         Counter obj = new Counter();
 
         // initial state.
-        Assert.assertNull(obj.getCounterId());
-        Assert.assertNull(obj.getCounterName());
-        Assert.assertNull(obj.getCounterValue());
+        Assertions.assertNull(obj.getCounterId());
+        Assertions.assertNull(obj.getCounterName());
+        Assertions.assertNull(obj.getCounterValue());
 
         // test getter and setter.
         obj.setCounterId(1L);
-        Assert.assertEquals(1L, obj.getCounterId().longValue());
+        Assertions.assertEquals(1L, obj.getCounterId().longValue());
         obj.setCounterName("counter1");
-        Assert.assertEquals("counter1", obj.getCounterName());
+        Assertions.assertEquals("counter1", obj.getCounterName());
         obj.setCounterValue(321L);
-        Assert.assertEquals(321L, obj.getCounterValue().longValue());
+        Assertions.assertEquals(321L, obj.getCounterValue().longValue());
 
         // test toString.
         //System.out.println(obj);
-        Assert.assertEquals("Counter[counterId=1,counterName=counter1,counterValue=321]", obj.toString());
+        Assertions.assertEquals("Counter[counterId=1,counterName=counter1,counterValue=321]", obj.toString());
     }
 
 }

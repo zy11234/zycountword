@@ -18,7 +18,7 @@ public class ResourceFileFinder {
         } else {
             // check availability as resource.
             URL url = ResourceFileFinder.class.getResource("/" + resFile);
-            return (url != null);
+            return url != null;
         }
     }
 

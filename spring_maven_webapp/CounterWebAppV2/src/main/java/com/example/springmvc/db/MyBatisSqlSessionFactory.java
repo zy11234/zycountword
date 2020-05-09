@@ -51,17 +51,17 @@ public class MyBatisSqlSessionFactory {
             // Initialize MyBatis.
             ins = Resources.getResourceAsStream(confFileName);
             sqlSessionFactory = new SqlSessionFactoryBuilder().build(ins);
-        } catch (IOException e) {
+        } catch (IOException e1) {
             // write the error log.
-            logger.error("MyBatis initialize failure.", e);
+            logger.error("MyBatis initialize failure.", e1);
         } finally {
             // clean up.
             if (ins != null) {
                 try {
                     ins.close();
                     ins = null;
-                } catch (IOException e) {
-                    // do nothing.
+                } catch (IOException e2) {
+                    logger.warn("Resource cleanup with error (can be ignored).", e2);
                 }
             }
         }

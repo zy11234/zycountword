@@ -22,8 +22,10 @@
         <maven.compiler.source>1.8</maven.compiler.source>
 
         <!-- Set dependency versions -->
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
-        <junit.version>4.13</junit.version>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine -->
+        <junit-jupiter.version>5.7.0-M1</junit-jupiter.version>
+        <!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
+        <junit-platform.version>1.7.0-M1</junit-platform.version>
         <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
         <servlet-api.version>4.0.1</servlet-api.version>
         <!-- https://mvnrepository.com/artifact/javax.servlet/jsp-api -->
@@ -55,9 +57,15 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit-jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-runner</artifactId>
+            <version>${junit-platform.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -263,6 +271,13 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-report-plugin</artifactId>
                 <version>3.0.0-M4</version>
+                <!--
+                <configuration>
+                    <properties>
+                        <includeTags>junit5</includeTags>
+                    </properties>
+                </configuration>
+                -->
             </plugin>
         </plugins>
     </reporting>

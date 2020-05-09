@@ -4,11 +4,11 @@ This is an example Java Web Application for web counter.
 
 It shows the following:
 
-  - Maven project configuration (pom.xml), using Spring MVC as web application framework.
+  - Maven project configuration (pom.xml), using Spring 5 MVC as web application framework.
   - Maven build and static website generation with reports.
   - Logging with SLF4J API, and use logback as the implementation.
   - Database (SQLite, MySQL) integration with MyBatis.
-  - Unit testing and coverage.
+  - JUnit 5 testing and coverage.
 
 
 **Reference Links:**
@@ -19,6 +19,10 @@ It shows the following:
   - [slf4j: how to log formatted message, object array, exception](https://stackoverflow.com/questions/6371638/slf4j-how-to-log-formatted-message-object-array-exception)
   - [MyBatis 3 Annotation Example with @Select, @Insert, @Update and @Delete](https://www.concretepage.com/mybatis-3/mybatis-3-annotation-example-with-select-insert-update-and-delete)
   - [MyBatis with Spring](https://www.baeldung.com/spring-mybatis)
+  - [HashMap Vs. ConcurrentHashMap Vs. SynchronizedMap – How a HashMap can be Synchronized in Java](https://crunchify.com/hashmap-vs-concurrenthashmap-vs-synchronizedmap-how-a-hashmap-can-be-synchronized-in-java/)
+  - [A Guide to JUnit 5](https://www.baeldung.com/junit-5-migration)
+  - [Migrating from JUnit 4 to JUnit 5](https://www.baeldung.com/junit-5-migration)
+  - [JUnit 5 Tutorial](https://howtodoinjava.com/junit-5-tutorial/)
 
 
 ## Developer Notes
@@ -198,7 +202,7 @@ I can set break-point in Java code for debugging. However, as I did not use it i
 
 ## Database Setup
 
-This example can use SQLite, and MySQL as back-end database.
+This example can use SQLite, and MySQL as back-end database. By default, it is configured to use SQLite.
 
 The database connection is configured in `mybatis-config.xml` under the resource folder `src/main/resources`.
 

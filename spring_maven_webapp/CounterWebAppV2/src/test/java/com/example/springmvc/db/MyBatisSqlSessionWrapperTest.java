@@ -1,11 +1,14 @@
 package com.example.springmvc.db;
 
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.apache.ibatis.session.SqlSession;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
+@Tag("junit5")
 public class MyBatisSqlSessionWrapperTest {
 
     @Test
@@ -19,7 +22,7 @@ public class MyBatisSqlSessionWrapperTest {
         };
 
         Object ret1 = wrapper1.execute();
-        Assert.assertNull(ret1);
+        Assertions.assertNull(ret1);
 
         // returns an object.
         MyBatisSqlSessionWrapper wrapper2 = new MyBatisSqlSessionWrapper() {
@@ -30,10 +33,10 @@ public class MyBatisSqlSessionWrapperTest {
         };
 
         Object ret2 = wrapper2.execute();
-        Assert.assertTrue(ret2 instanceof Date);
+        Assertions.assertTrue(ret2 instanceof Date);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void testPerformInSessionExceptions() {
         MyBatisSqlSessionWrapper wrapper = new MyBatisSqlSessionWrapper() {
             @Override
@@ -42,7 +45,9 @@ public class MyBatisSqlSessionWrapperTest {
             }
         };
 
-        wrapper.execute();
+        Assertions.assertThrows(RuntimeException.class, () -> {
+            wrapper.execute();
+        });
     }
 
 }

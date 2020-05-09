@@ -1,7 +1,7 @@
 package com.example.springmvc.service.impl;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.example.springmvc.service.INamedCounter;
 
@@ -12,9 +12,9 @@ import com.example.springmvc.service.INamedCounter;
  */
 public class MemoryCounterImpl implements INamedCounter {
     /**
-     * Use hash map to hold the counters.
+     * Use ConcurrentHashMap to hold the counters.
      */
-    private final Map<String, Long> counterMap = new HashMap<>();
+    private final Map<String, Long> counterMap = new ConcurrentHashMap<>();
 
     @Override
     public void reset(String counterName) {
@@ -24,12 +24,12 @@ public class MemoryCounterImpl implements INamedCounter {
 
     @Override
     public void setValue(String counterName, long counterValue) {
-    	if (counterValue < 0) {
-    		throw new IllegalArgumentException("counterValue must >= 0");
-    	} else {
-	        Long val = counterValue;
-	        counterMap.put(counterName, val);
-    	}
+        if (counterValue < 0) {
+            throw new IllegalArgumentException("counterValue must >= 0");
+        } else {
+            Long val = counterValue;
+            counterMap.put(counterName, val);
+        }
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MemoryCounterImpl implements INamedCounter {
         } else {
             valNew = 1L; // new counter start from 0, increased to 1.
         }
-        
+
         counterMap.put(counterName, valNew);
         return valNew;
     }
@@ -55,9 +55,9 @@ public class MemoryCounterImpl implements INamedCounter {
         Long valResult;
         Long val = counterMap.get(counterName);
         if (val != null) {
-        	valResult = val;
+            valResult = val;
         } else {
-        	valResult = 0L;  // start from 0.
+            valResult = 0L;  // start from 0.
             counterMap.put(counterName, valResult);
         }
         return valResult;
