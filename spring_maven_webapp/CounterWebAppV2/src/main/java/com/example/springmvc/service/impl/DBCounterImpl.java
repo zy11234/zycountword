@@ -9,7 +9,7 @@ import com.example.springmvc.service.INamedCounter;
  *
  * @author bobyuan
  */
-public class DatabaseCounterImpl implements INamedCounter {
+public class DBCounterImpl implements INamedCounter {
     private final CounterDAO dao = new CounterDAO();
 
     @Override

@@ -10,40 +10,20 @@ import com.example.springmvc.service.INamedCounter;
 public class NamedCounterFactoryTest {
 
     @Test
-    public void test_getCounterImpl_MemoryCounter() {
-        INamedCounter nc1 = NamedCounterFactory.getCounterImpl("MemoryCounter");
-        Assertions.assertTrue(nc1 instanceof MemoryCounterImpl);
-        INamedCounter nc2 = NamedCounterFactory.getCounterImpl("memoryCounter"); // case insensitive.
-        Assertions.assertTrue(nc2 instanceof MemoryCounterImpl);
+    public void test_getCounterImpl_RAMCounter() {
+        INamedCounter nc1 = NamedCounterFactory.getCounterImpl(NamedCounterFactory.CounterType.RAM_COUNTER);
+        Assertions.assertTrue(nc1 instanceof RAMCounterImpl);
     }
 
     @Test
-    public void test_getCounterImpl_DatabaseCounter() {
-        INamedCounter nc3 = NamedCounterFactory.getCounterImpl("DatabaseCounter");
-        Assertions.assertTrue(nc3 instanceof DatabaseCounterImpl);
-        INamedCounter nc4 = NamedCounterFactory.getCounterImpl("databaseCounter"); // case insensitive.
-        Assertions.assertTrue(nc4 instanceof DatabaseCounterImpl);
+    public void test_getCounterImpl_DBCounter() {
+        INamedCounter nc3 = NamedCounterFactory.getCounterImpl(NamedCounterFactory.CounterType.DB_COUNTER);
+        Assertions.assertTrue(nc3 instanceof DBCounterImpl);
     }
 
     @Test
-    public void test_getCounterImpl_Null() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            NamedCounterFactory.getCounterImpl(null);
-        });
+    public void test_getCounterImpl_default() {
+        INamedCounter nc1 = NamedCounterFactory.getCounterImpl(null);
+        Assertions.assertTrue(nc1 instanceof RAMCounterImpl);
     }
-
-    @Test
-    public void test_getCounterImpl_Empty() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            NamedCounterFactory.getCounterImpl("");
-        });
-    }
-
-    @Test
-    public void test_getCounterImpl_NoSuchCounter() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            NamedCounterFactory.getCounterImpl("NoSuchCounter");
-        });
-    }
-
 }

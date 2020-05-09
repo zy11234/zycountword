@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import com.example.springmvc.service.INamedCounter;
 
 @Tag("junit5")
-public class DatabaseCounterImplTest {
+public class RAMCounterImplTest {
 
     @Test
     public void test_reset_setValue() {
         final String COUNTER_NAME_1 = "counter1";
-        INamedCounter nc = new DatabaseCounterImpl();
+        INamedCounter nc = new RAMCounterImpl();
 
         //test reset().
         nc.reset(COUNTER_NAME_1);
@@ -33,7 +33,10 @@ public class DatabaseCounterImplTest {
     @Test
     public void test_setValue_invalid() {
         final String COUNTER_NAME_1 = "counter1";
-        INamedCounter nc = new DatabaseCounterImpl();
+        INamedCounter nc = new RAMCounterImpl();
+
+        // if counter is not initialized, it will also start from 0.
+        Assertions.assertEquals(0, nc.getValue(COUNTER_NAME_1));
 
         // valid cases.
         nc.setValue(COUNTER_NAME_1, 0);
@@ -49,7 +52,7 @@ public class DatabaseCounterImplTest {
     public void test_increase() {
         final String COUNTER_NAME_2 = "counter2";
         final String COUNTER_NAME_X = "counterX";
-        INamedCounter nc = new DatabaseCounterImpl();
+        INamedCounter nc = new RAMCounterImpl();
 
         nc.reset(COUNTER_NAME_2);
         Assertions.assertEquals(0, nc.getValue(COUNTER_NAME_2));
@@ -65,7 +68,7 @@ public class DatabaseCounterImplTest {
         Assertions.assertEquals(3, nc.getValue(COUNTER_NAME_2));
 
         // exceptional cases #1.
-        nc.reset(COUNTER_NAME_X);
+        // note here COUNTER_NAME_X does not exist yet.
         Assertions.assertEquals(1, nc.increase(COUNTER_NAME_X)); //start from 0.
         Assertions.assertEquals(1, nc.getValue(COUNTER_NAME_X));
 
@@ -80,7 +83,8 @@ public class DatabaseCounterImplTest {
     @Test
     public void test_getValue() {
         final String COUNTER_NAME_1 = "counter1";
-        INamedCounter nc = new DatabaseCounterImpl();
+        final String COUNTER_NAME_Y = "counterY";
+        INamedCounter nc = new RAMCounterImpl();
 
         //normal cases.
         nc.reset(COUNTER_NAME_1);
@@ -88,12 +92,17 @@ public class DatabaseCounterImplTest {
 
         nc.setValue(COUNTER_NAME_1, Long.MAX_VALUE);
         Assertions.assertEquals(Long.MAX_VALUE, nc.getValue(COUNTER_NAME_1));
+
+        //exceptional cases.
+        // note here COUNTER_NAME_Y does not exist yet.
+        Assertions.assertEquals(0, nc.getValue(COUNTER_NAME_Y));  //start from 0.
     }
+
 
     @Test
     public void test_basic_usage() {
         final String COUNTER_NAME = "counter1";
-        INamedCounter nc = new DatabaseCounterImpl();
+        INamedCounter nc = new RAMCounterImpl();
 
         nc.reset(COUNTER_NAME);
         Assertions.assertEquals(0, nc.getValue(COUNTER_NAME));
@@ -116,7 +125,7 @@ public class DatabaseCounterImplTest {
     public void test_extended_usage() {
         final String COUNTER_NAME_1 = "counter1";
         final String COUNTER_NAME_2 = "counter2";
-        INamedCounter nc = new DatabaseCounterImpl();
+        INamedCounter nc = new RAMCounterImpl();
 
         nc.reset(COUNTER_NAME_1);
         Assertions.assertEquals(0, nc.getValue(COUNTER_NAME_1));

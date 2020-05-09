@@ -10,7 +10,7 @@ import com.example.springmvc.service.INamedCounter;
  *
  * @author bobyuan
  */
-public class MemoryCounterImpl implements INamedCounter {
+public class RAMCounterImpl implements INamedCounter {
     /**
      * Use ConcurrentHashMap to hold the counters.
      */

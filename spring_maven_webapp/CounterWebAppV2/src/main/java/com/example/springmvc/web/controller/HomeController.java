@@ -20,8 +20,8 @@ public class HomeController {
     private static final SimpleDateFormat SDF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
     private static final String COUNTER_NAME = "webcounter";
 
-    //public static final INamedCounter namedCounter = NamedCounterFactory.getCounterImpl("MemoryCounter");
-    public static final INamedCounter namedCounter = NamedCounterFactory.getCounterImpl("DatabaseCounter");
+    //public static final INamedCounter namedCounter = NamedCounterFactory.getCounterImpl(NamedCounterFactory.CounterType.RAM_COUNTER);
+    public static final INamedCounter namedCounter = NamedCounterFactory.getCounterImpl(NamedCounterFactory.CounterType.DB_COUNTER);
 
     private static long getNextCounterValue() {
         return namedCounter.increase(COUNTER_NAME);

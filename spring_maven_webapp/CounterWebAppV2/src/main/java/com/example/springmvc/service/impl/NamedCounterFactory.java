@@ -3,25 +3,34 @@ package com.example.springmvc.service.impl;
 import com.example.springmvc.service.INamedCounter;
 
 /**
- * Factory to get counter implementation (MemoryCounter / DatabaseCounter).
+ * Factory to get counter implementations.
  *
  * @author bobyuan
  */
 public class NamedCounterFactory {
 
-    public static INamedCounter getCounterImpl(String counterType) {
-        INamedCounter namedCounter = null;
-        if ("MemoryCounter".equalsIgnoreCase(counterType)) {
-            namedCounter = new MemoryCounterImpl();
-        } else if ("DatabaseCounter".equalsIgnoreCase(counterType)) {
-            namedCounter = new DatabaseCounterImpl();
+    /** Enumerate of the available counter implementation types. */
+    public enum CounterType {
+        RAM_COUNTER, DB_COUNTER;
+    }
+
+    /**
+     * Get a counter implementation by type, default is RAMCounterImpl.
+     *
+     * @param counterType The given counter type.
+     * @return A INamedCounter implementation.
+     */
+    public static INamedCounter getCounterImpl(CounterType counterType) {
+        INamedCounter impl = null;
+        if (counterType == CounterType.RAM_COUNTER) {
+            impl = new RAMCounterImpl();
+        } else if (counterType == CounterType.DB_COUNTER) {
+            impl = new DBCounterImpl();
+        } else {
+            // default.
+            impl = new RAMCounterImpl();
         }
 
-        if (namedCounter != null) {
-            return namedCounter;
-        } else {
-            // throw exception if goes here.
-            throw new IllegalArgumentException("Invalid counterType: " + counterType);
-        }
+        return impl;
     }
 }
