@@ -1,6 +1,5 @@
 package com.example.springmvc.db;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import org.apache.ibatis.session.SqlSession;
@@ -9,12 +8,12 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 @Tag("junit5")
-public class MyBatisSqlSessionWrapperTest {
+public class MyBatisTransactionTemplateTest {
 
     @Test
     public void testPerformInSessionReturns() {
         // returns null.
-        MyBatisSqlSessionWrapper wrapper1 = new MyBatisSqlSessionWrapper() {
+        MyBatisTransactionTemplate wrapper1 = new MyBatisTransactionTemplate() {
             @Override
             protected Object performInSession(SqlSession session) {
                 return null;
@@ -25,7 +24,7 @@ public class MyBatisSqlSessionWrapperTest {
         Assertions.assertNull(ret1);
 
         // returns an object.
-        MyBatisSqlSessionWrapper wrapper2 = new MyBatisSqlSessionWrapper() {
+        MyBatisTransactionTemplate wrapper2 = new MyBatisTransactionTemplate() {
             @Override
             protected Object performInSession(SqlSession session) {
                 return new Date();
@@ -38,7 +37,7 @@ public class MyBatisSqlSessionWrapperTest {
 
     @Test
     public void testPerformInSessionExceptions() {
-        MyBatisSqlSessionWrapper wrapper = new MyBatisSqlSessionWrapper() {
+        MyBatisTransactionTemplate wrapper = new MyBatisTransactionTemplate() {
             @Override
             protected Object performInSession(SqlSession session) {
                 throw new RuntimeException("This is a test exception from unit test");

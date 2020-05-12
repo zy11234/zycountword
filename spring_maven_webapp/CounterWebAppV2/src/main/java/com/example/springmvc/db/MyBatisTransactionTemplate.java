@@ -9,8 +9,8 @@ import org.slf4j.LoggerFactory;
  *
  * @author bobyuan
  */
-public abstract class MyBatisSqlSessionWrapper {
-    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MyBatisSqlSessionWrapper.class);
+public abstract class MyBatisTransactionTemplate {
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(MyBatisTransactionTemplate.class);
 
     /**
      * Wrapped in a session, execute the performInSession() method.

@@ -38,7 +38,7 @@
     </environments>
 
     <mappers>
-        <mapper class="com.example.springmvc.db.dao.CounterMapper" />
+        <mapper class="com.example.springmvc.db.mapper.CounterMapper" />
     </mappers>
 
 </configuration>

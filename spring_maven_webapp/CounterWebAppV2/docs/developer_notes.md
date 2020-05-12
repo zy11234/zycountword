@@ -103,6 +103,16 @@ Normally it will automatically open a browser to access the web application.
 
 ![](asset/eclipse_tomcat/Run_On_Server_3.png)
 
+Note, if you see "HTTP Status 500 – Internal Server Error" like below:
+
+```
+Cause: java.sql.SQLException: path to 'db/sqlite/counter.db': 'C:\opt\app\eclipse\db' does not exist
+```
+
+It means the JDBC URL using relative path to SQLite database file is not able to locate the file from current working directory. To specify the working directory to the root of this project will fix this problem. Click "Workspace..." button, and select this project.
+
+![](asset/eclipse_tomcat/Run_On_Server_4.png)
+
 
 
 
@@ -316,7 +326,7 @@ C:\opt\app\jetty-distribution-9.4.28.v20200408
 
 
 
-Now goes to Jetty home directory (this becomes the **current working directory**), launch it by command:
+Now goes to Jetty home directory (this becomes the *current working directory*), launch it by command:
 ```shell
 java -jar start.jar
 ```
@@ -357,7 +367,7 @@ C:\opt\app\apache-tomcat-9.0.33
 
 
 
-Now goes to Tomcat home directory (this becomes the **current working directory**), launch it by command:
+Now goes to Tomcat home directory (this becomes the *current working directory*), launch it by command:
 ```shell
 bin\startup.bat
 ```

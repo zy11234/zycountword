@@ -1,4 +1,4 @@
-package com.example.springmvc.db.dao;
+package com.example.springmvc.db.mapper;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
